@@ -6,7 +6,7 @@ output: html_document
 
 
 
-<img src="`r here::here('logos/Spring_25_SDG_Analytics_in_R_Flyer.png')`" />
+<img src="`r here::here('logos/Spring_25_SDG_Analytics_in_R_Flyer.pdf')`" />
 
 
 
