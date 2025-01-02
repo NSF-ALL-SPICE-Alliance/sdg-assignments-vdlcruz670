@@ -59,7 +59,7 @@ Use the `clean_names` function from the janitor package to clean up the column n
 
 ```{r}
 sdr_data <- sdr_data %>% 
-  clean_names()
+  clean_names() 
 ```
 
 #### `ggplot()`
@@ -130,6 +130,14 @@ Cool! It seems that the darkest blue points (countries with the lowest SDG 5 sco
 
 #### <span style="color: red;">Challenge 1</span>
 Create a scatterplot using two different SDG scores. Then, color the points by using a third SDG score. In a couple of sentences, describe what you see.
+
+
+```{r}
+ggplot(data = sdr_data, aes(x = goal_7_score, y = goal_13_score, color = goal_12_score)) +
+  geom_point()
+```
+
+
 
 ### Bar Chart
 

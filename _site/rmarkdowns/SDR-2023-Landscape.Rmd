@@ -34,6 +34,24 @@ sdr_data <- sdr_data %>%
   clean_names()
 ```
 
+```{r}
+my_plot <- ggplot(data = sdr_data, aes(x = lower_secondary_completion_rate, fill = regions_used_for_the_sdr)) +
+  geom_histogram()
+
+ggplotly(my_plot)
+```
+
+
+```{r}
+sdr_data_oceania <- sdr_data %>% 
+  filter(regions_used_for_the_sdr == "Oceania")
+```
+
+```{r}
+ggplot(data = sdr_data_oceania, aes(x = lower_secondary_completion_rate, y = country)) +
+  geom_bar(stat = "identity")
+```
+
 
 ```{r}
 
@@ -149,15 +167,15 @@ ggcorrplot::ggcorrplot(cor, method = "circle", type = "lower", lab = TRUE)
 goal 7 tile
 
 ```{r}
-goal_seven_data <- sdr_data %>% 
-  select(country, regions_used_for_the_sdr, normalized_score_sdg7_elecac, normalized_score_sdg7_cleanfuel, normalized_score_sdg7_co2twh, normalized_score_sdg7_renewcon, goal_7_dash, goal_7_trend)
+goal_five_data <- sdr_data %>% 
+  select(country, regions_used_for_the_sdr, normalized_score_sdg5_familypl, normalized_score_sdg5_edat, normalized_score_sdg5_lfpr, normalized_score_sdg5_parl, goal_5_dash, goal_5_trend)
 ```
 
 
 ```{r}
 # Melt the data for easier plotting
 # Reshape the data using pivot_longer
-melted_data <- pivot_longer(goal_seven_data, cols = starts_with("normalized_score_sdg7"), 
+melted_data <- pivot_longer(goal_five_data, cols = starts_with("normalized_score_sdg5"), 
                             names_to = "variable", values_to = "value")
 
 # Plotting heatmap using geom_tile

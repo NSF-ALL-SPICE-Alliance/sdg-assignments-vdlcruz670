@@ -1,0 +1,96 @@
+---
+title: "Japan"
+author: "Connor Flynn"
+date: "2024-10-17"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(janitor)
+library(plotly)
+```
+
+```{r, message=FALSE}
+sdr_data <- read_csv(here("data/SDR-2023-Data.csv"))
+```
+
+```{r}
+sdr_data <- sdr_data %>% 
+  clean_names() 
+```
+
+```{r}
+sdr_data_MI <- sdr_data %>% 
+  filter(country == "Marshall Islands")
+```
+
+
+
+```{r}
+sdr_data_Japan <- sdr_data %>% 
+  filter(country == "Japan") %>% 
+  select(goal_1_score:goal_17_score)
+```
+
+```{r}
+sdr_data_Japan_longer <- sdr_data_Japan %>% 
+  pivot_longer(cols = goal_1_score:goal_17_score,
+               names_to = "goal",
+               values_to = "score")
+```
+
+```{r}
+ggplot(data = sdr_data_Japan_longer, aes(x = score, y = reorder(goal, score))) +
+  geom_bar(stat = "identity", fill = "steelblue", color = "black") +
+  theme_minimal() +
+  labs(title = "Japan SDG Scores",
+       x = "Score",
+       y = "") +
+  scale_fill_brewer(palette = "Set3")
+```
+
+Lydia 
+
+```{r}
+Goals<-SDGsR::get_SDGs_goals_titles()
+Goals=Goals %>% 
+  rowid_to_column() %>% 
+  rowwise() %>% 
+  mutate(Papers=sample(c(0:100),1#,prob =c(0.3,0.19,0.08, 0.07,
+  #                      0.06,
+  #                      0.05,
+  #                      0.05,
+  #                      0.05,
+  #                      0.05,
+  #                      0.05,
+  #                      0.05
+  # )
+  )
+  )
+```
+
+```{r}
+clr=SDGsR::SDGs_cols(paste0("Goal",Goals$rowid))
+```
+
+
+
+
+Stacey
+
+```{r}
+congo_rf_results <- ggplot(sdr_data, aes(x = normalized_score_sdg2_obesity, y = normalized_score_sdg8_unemp, label = country, color = regions_used_for_the_sdr)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  ylim(0,100)
+
+ggplotly(congo_rf_results)
+```
+
+
+
